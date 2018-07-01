@@ -1,3 +1,5 @@
+var fs = require("fs");
+var path = require("path");
 var semver = require("semver");
 var css2rn = require("css-to-react-native-transform").default;
 var stylus = require("stylus");
@@ -30,7 +32,22 @@ module.exports.transform = function(src, filename, options) {
   }
 
   if (filename.endsWith(".styl")) {
-    var cssObject = css2rn(stylus.render(src, {filename}), { parseMediaQueries: true });
+    var STYLES_PATH = path.join(process.cwd(), 'styles');
+    var compiled
+    var compiler = stylus(src);
+    compiler.set('filename', filename);
+
+    // TODO: Make this a setting
+    if (fs.existsSync(STYLES_PATH)) {
+      compiler.include(STYLES_PATH);
+    }
+    compiler.render(function (err, res) {
+      if (err) {
+        throw new Error(err);
+      }
+      compiled = res;
+    });
+    var cssObject = css2rn(compiled, { parseMediaQueries: true });
 
     return upstreamTransformer.transform({
       src: "module.exports = " + JSON.stringify(cssObject),
