@@ -32,7 +32,7 @@ module.exports.transform = function(src, filename, options) {
   }
 
   if (filename.endsWith(".styl")) {
-    var STYLES_PATH = path.join(process.cwd(), 'styles');
+    var STYLES_PATH = path.join(process.cwd(), 'styles/index.styl');
     var compiled
     var compiler = stylus(src);
     compiler.set('filename', filename);
