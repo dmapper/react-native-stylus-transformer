@@ -39,7 +39,7 @@ module.exports.transform = function(src, filename, options) {
 
     // TODO: Make this a setting
     if (fs.existsSync(STYLES_PATH)) {
-      compiler.include(STYLES_PATH);
+      compiler.import(STYLES_PATH);
     }
     compiler.render(function (err, res) {
       if (err) {
