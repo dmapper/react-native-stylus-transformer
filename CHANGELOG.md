@@ -1,3 +1,16 @@
+## v1.2.0
+
+- Added: `renderToCSS` method. It can be used together with the PostCSS transformer to add support for CSS variables.
+
+## v1.1.4
+
+- Updated: `semver` dependency to v5.6.0.
+- Updated: `css-to-react-native-transform` dependency to v1.8.1.
+
+## v1.1.3
+
+- Fixed: Compatibility with react-native v0.59
+
 ## v1.1.2
 
 - Updated: `css-to-react-native-transform` dependency to v1.7.0.
