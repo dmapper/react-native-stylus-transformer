@@ -3,6 +3,8 @@ var path = require("path");
 var semver = require("semver");
 var css2rn = require("css-to-react-native-transform").default;
 var stylus = require("stylus");
+var poststylus = require('poststylus')
+var rem2pixel = require('postcss-rem-to-pixel')
 
 var upstreamTransformer = null;
 
@@ -39,12 +41,16 @@ function renderToCSS({ src, filename, options }) {
   if (fs.existsSync(STYLES_PATH)) {
     compiler.import(STYLES_PATH);
   }
-  compiler.render(function (err, res) {
+
+  compiler
+  .use(poststylus([rem2pixel]))
+  .render(function (err, res) {
     if (err) {
       throw new Error(err);
     }
     compiled = res;
   });
+
   return compiled
 
   // return stylus.render(src, { filename });
