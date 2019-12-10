@@ -27,8 +27,8 @@
     "transformer"
   ],
   "dependencies": {
+    "@startupjs/postcss-rem-to-pixel": "^1004.1.2",
     "css-to-react-native-transform": "^1.8.1",
-    "postcss-rem-to-pixel": "https://github.com/dmapper/postcss-rem-to-pixel",
     "poststylus": "^1.0.0",
     "semver": "^5.6.0"
   },
