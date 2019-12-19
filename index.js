@@ -3,9 +3,9 @@ var path = require("path");
 var semver = require("semver");
 var css2rn = require("css-to-react-native-transform").default;
 var stylus = require("stylus");
+var stylusHashPlugin = require("@dmapper/stylus-hash-plugin")
 var poststylus = require("poststylus");
 var rem2pixel = require("@startupjs/postcss-rem-to-pixel");
-
 var upstreamTransformer = null;
 
 var reactNativeVersionString = require("react-native/package.json").version;
@@ -44,8 +44,8 @@ function renderToCSS({ src, filename, options }) {
   }
 
   if (fs.existsSync(CONFIG_PATH)) {
-    const config = require(CONFIG_PATH)
-    if (config && config.ui) compiler.define('$UI', config.ui, true)
+    const { ui } = require(CONFIG_PATH)
+    if (ui) compiler.use(stylusHashPlugin('$UI', ui))
   }
 
   compiler.use(poststylus([rem2pixel])).render(function(err, res) {

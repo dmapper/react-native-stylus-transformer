@@ -27,6 +27,7 @@
     "transformer"
   ],
   "dependencies": {
+    "@dmapper/stylus-hash-plugin": "0.0.1",
     "@startupjs/postcss-rem-to-pixel": "^1004.1.2",
     "css-to-react-native-transform": "^1.8.1",
     "poststylus": "^1.0.0",
