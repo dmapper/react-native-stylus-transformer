@@ -33,6 +33,7 @@ if (reactNativeMinorVersion >= 59) {
 
 function renderToCSS({ src, filename, options }) {
   var STYLES_PATH = path.join(process.cwd(), "styles/index.styl");
+  var CONFIG_PATH = path.join(process.cwd(), "startupjs.config.js");
   var compiled;
   var compiler = stylus(src);
   compiler.set("filename", filename);
@@ -40,6 +41,11 @@ function renderToCSS({ src, filename, options }) {
   // TODO: Make this a setting
   if (fs.existsSync(STYLES_PATH)) {
     compiler.import(STYLES_PATH);
+  }
+
+  if (fs.existsSync(CONFIG_PATH)) {
+    const config = require(CONFIG_PATH)
+    if (config && config.ui) compiler.define('$UI', config.ui, true)
   }
 
   compiler.use(poststylus([rem2pixel])).render(function(err, res) {
